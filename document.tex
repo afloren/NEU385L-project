@@ -8,7 +8,7 @@
 \usepackage{url}
 \usepackage{hyperref}
 
-\title{Classifying perceived object count from fMRI data}
+\title{Classifying perceived object count from fMRI time series}
 \author{Andrew Floren}
 \date{}
 
@@ -25,18 +25,18 @@ Thus far, researchers have been successful in differentiating the patterns of ac
 For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a place.
 Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{d,e,f}.
 However, these studies are limited to the dimensions that can be resolved by the current predictive methods; i.e., we can resolve the difference between a subject viewing a face and a place, but not between a subject viewing two different faces.
-Our goal is to increase both the number of resolvable dimensions, as well as the resolution along those dimensions.
+Our goals are to introduce and evaluate a new resolvable dimension, as well as to develop better predictive methods for increasing the resolution along resolvable dimensions in general.
 
 The current lack of resolvable dimensions is due in large part to the novelty of the approach.
-There is a wealth of information regarding correlation analyses between functional activation and all manner tasks, but so far the number of tasks that predictive methods have been applied to is limited.
-The resolvable resolution along dimensions is limited in part by measurement noise; this includes noise introduced by the scanner as well as cognitive processes.
+There is a wealth of information regarding correlation analyses between functional activation and all manner of tasks, but so far the number of tasks that predictive methods have been applied to is limited.
+The resolution along dimensions is limited in part by measurement noise; this includes noise introduced by the scanner as well as cognitive processes.
 However, the resolution is also limited by the quality of the predictive methods utilized.
 Thus far, only relatively simple machine learning techniques have been employed due to the necessary cross-disciplinary collaboration required for more complex machine learning techniques.
 
-To increase the number of resolvable dimensions, we will evaluate the performance of predictive methods on a new task paradigm.
 Our own preliminary results suggest that it should be possible to predict the number of objects a subject is viewing and this is where we will be focusing the initial stages of our research.
+We will evaluate the precision and accuracy with which this dimension can be predicted.
 Being able to classify not only what the subject is viewing, but also how many will allow researchers to develop new cognitive and behavioral studies. 
-Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure this dimension.
+Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure this dimension and dimensions in general.
 
 \section{Background}
 Next comes a Background section, which introduces the key scientific or technological concepts that underlie your Aims. 
@@ -44,6 +44,8 @@ This section will have lots of references to previous work in the area.
 It's usually best to divide this section based on your Aims. 
 Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
 This section should be around 1000 words.
+
+
 
 \section{Preliminary/Expected Results}
 The third section is Preliminary Results, a concise description of data you've already obtained. 
