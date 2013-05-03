@@ -8,19 +8,21 @@
 \usepackage{url}
 \usepackage{hyperref}
 
-\title{Project title}
+\title{Classifying perceived object count from fMRI data}
 \author{Andrew Floren}
 \date{}
+
+\bibliographystyle{ieeetr}
 
 \begin{document}
 \maketitle{}
 
 \section{Aims}
 Traditionally, fMRI has been used to study the spatial and temporal correlation of metabolic activity in the brain with various external activities or tasks.
-A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{a,b,c}.
+A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{Haxby2001,b,c}.
 In this way, researchers hope to uncover more complex relationships between the patterns of activation and the external activity.
 Thus far, researchers have been successful in differentiating the patterns of activation that result from subjects viewing broad categories of objects.
-For example, the researchers in \cite{a} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a place.
+For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a place.
 Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{d,e,f}.
 However, these studies are limited to the dimensions that can be resolved by the current predictive methods; i.e., we can resolve the difference between a subject viewing a face and a place, but not between a subject viewing two different faces.
 Our goal is to increase both the number of resolvable dimensions, as well as the resolution along those dimensions.
@@ -31,14 +33,29 @@ The resolvable resolution along dimensions is limited in part by measurement noi
 However, the resolution is also limited by the quality of the predictive methods utilized.
 Thus far, only relatively simple machine learning techniques have been employed due to the necessary cross-disciplinary collaboration required for more complex machine learning techniques.
 
-To increase the number of resolvable dimensions, we will evaluate the performance of predictive methods on new tasks using the results from more traditional fMRI experiments as guidelines for finding tasks with a high probability of success.
-Our own preliminary results suggest that it should be possible to predict the number of objects a subject is viewing and this is where we will be focusing the initial stages of our research. 
-Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure these dimensions.
+To increase the number of resolvable dimensions, we will evaluate the performance of predictive methods on a new task paradigm.
+Our own preliminary results suggest that it should be possible to predict the number of objects a subject is viewing and this is where we will be focusing the initial stages of our research.
+Being able to classify not only what the subject is viewing, but also how many will allow researchers to develop new cognitive and behavioral studies. 
+Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure this dimension.
 
 \section{Background}
+Next comes a Background section, which introduces the key scientific or technological concepts that underlie your Aims. 
+This section will have lots of references to previous work in the area. 
+It's usually best to divide this section based on your Aims. 
+Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
+This section should be around 1000 words.
 
 \section{Preliminary/Expected Results}
+The third section is Preliminary Results, a concise description of data you've already obtained. 
+If you don't have any data yet, you can substitute a short section called "Expected Results" that describes the character of the data you plan to obtain. 
+This section should be around 500 words and include several figures such as plots of experimental data (planned or real) and diagrams that lay out experimental rigs, protocols, and stimuli.
 
 \section{Research Design}
+Finally, comes the Research Design. 
+This lays out the core of the research, describing precisely but concisely what you plan to do, how you are going to analyze the results, and how the results will be interpreted. 
+Use references to existing work when pertinent. 
+Use figures and graphics as needed (1000 – 2000 words).
+
+\bibliography{bib}
 
 \end{document}
