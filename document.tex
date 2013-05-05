@@ -63,7 +63,8 @@ An example frame from the stimulus appears in figure \ref{fig:preliminary-data-f
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures/preliminary-data-frame}
-\cation{}
+\cation{An example frame from the stimulus used in our preliminary experiment.
+The number of characters in the scene were successfully predicted from the fMRI time series data despite the complex scene and camera motion.}
 \label{fig:preliminary-data-frame}
 \end{figure}
 Using both neural networks and a linear support vector machines (SVM) we were able to predict the number of characters that a subject was viewing at well above chance levels.
@@ -82,7 +83,9 @@ The accuracy results for both the neural network and linear SVM are summarized a
 \caption{}
 \label{fig:nn-confusion}
 \end{subfigure}
-\caption{}
+\caption{The confusion matrices for the \subref{fig:svm-confusion} linear SVM and the \subref{fig:nn-confusion} feed-forward neural network trained on our preliminary data.
+Each cell contains the number of frames that contained a specific character count, as indicated by the row, that were classified as some other character count, as indicated by the column.
+Therefore, the cells along the diagonal indicate correctly classified frames.}
 \label{fig:preliminary-data-confusion}
 \end{figure}
 Each cell in a confusion matrix contains the number of examples from one class, indicated by the row, that were classified as another class, indicated by the column.
@@ -118,7 +121,10 @@ An example frame is presented in figure \ref{fig:stimulus-frame}.
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures/stimulus-frame}
-\caption{}
+\caption{An example frame from the stimulus to be used in our experiment.
+This frame depicts an example when six faces are present, but the number and location of the faces can vary randomly from one to six.
+Notice that the third image in the first row and the second image in the second row are different images of the same person.
+Detecting the presence of different images of the same person or place in a single presentation is the task that the subjects will be performing.}
 \label{fig:stimulus-frame}
 \end{figure}
 We are using the same face and place images used in \cite{Haxby2001}.
@@ -154,25 +160,28 @@ We employ a procedure that we call harmonic analysis where we rank each voxel by
 In this way, we select all voxels which covary in any way with respect to the stimulus.
 
 \subsection{Analysis}
-
-
-Each frame in the time series will then be labeled according to the number of faces presented to the subject at the time of image acquisition.
+To determine the resolvability of the dimension of perceived object count we will estimate the performance of machine learning classifers at predicting the presented number of faces in the stimulus.
+Each frame in the time series will be labeled according to the number of faces presented to the subject at the time of image acquisition.
 These labeled examples are presented to the machine learning algorithms in order to train them.
 The trained algorithms are then tested by guessing the correct label of previously unpresented examples.
-The performance of the machine learning algorithm on the dataset is the probability that a previously unpresented examle will be labeled correctly.
+The performance of a machine learning algorithm on the dataset is defined to be the probability that a previously unpresented examle will be labeled correctly.
 This measure of performance can only be estimated due to the finite number of examples.
 
-In order to minimize the bias of our estimate of performance, we will test the neural network and linear SVM using a cross-validation approach \ref{crossval}.
+In order to minimize the bias of our estimate of performance, we will test our machine learning algorithms using a cross-validation approach \ref{crossval}.
 First, the entire dataset is split into $N$ partitions or folds.
-Next, the linear SVM is trained on every example in $N-1$ folds and performance is tested on the remaining fold.
-This is repeated for all $N$ folds and the performance from each fold is averaged to obtain the final estimate of performance.
-This whole process is then repeated to obtain an estimate of performance for the neural network.
+Each machine learning algorithm is trained on every example in $N-1$ folds and performance is tested on the remaining fold.
+This is repeated for all $N$ folds and the performance from each fold is averaged to obtain the final estimate of performance for each algorithm.
 Researchers have noted that temporal correlation between adjacent frames can lead to overly optimistic estimates of performance if adjacent frames are present in the training and test sets \ref{tempcor}.
 Therefore, the folds will be selected such that a minimum average temporal distance is maintained between all of the folds.
 Additionally, we will ensure that number of examples of each face count is equally represented in all of the folds.
 This is knows as stratified cross-fold validation \ref{strat} and it leads to a less biased estimate of classifier performance.
 
-
+With a method for accurately estimating the performance of machine learning classifiers on our dataset we can compare and develop better classification techniques.
+Initially, we will estimate the performance of classic linear support vector machines (SVM) and feed-froward neural networks.
+Previous work and our own preliminary reuslts indicate that these basic approaches work very well and they will servce is a good baseline for comparing other algorithms.
+We will then analyze more complex recurrent neural networks, such as Restricted Boltzmann Machines, and non-linear support vector machines in order to discover improved classification techniques.
+Improved classification techniques directly translate to improved resolution along the dimension of perceived object count and will likely lead to improved resolution in other dimensions as well.
+New measureable dimensions and improved resolution along those dimensions in turn will lead to new insightful behavioural and cognitive experiments.
 
 \bibliography{bib}
 
