@@ -23,11 +23,11 @@
 
 \section{Aims}
 Traditionally, fMRI has been used to study the spatial and temporal correlation of metabolic activity in the brain with various external activities or tasks.
-A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{Haxby2001,b,c}.
+A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{Haxby2001,Mitchell2003,Haynes2006}.
 In this way, researchers hope to uncover more complex relationships between the patterns of activation and the external activity.
 Thus far, researchers have been successful in differentiating the patterns of activation that result from subjects viewing broad categories of objects.
 For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a place.
-Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{d,e,f}.
+Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{Lewis-Peacock2012,Davatzikos2005}.
 However, these studies are limited to the dimensions that can be resolved by the current predictive methods; i.e., we can resolve the difference between a subject viewing a face and a place, but not between a subject viewing two different faces.
 Our goals are to introduce and evaluate a new resolvable dimension, as well as to develop better predictive methods for increasing the resolution along resolvable dimensions in general.
 
@@ -63,7 +63,7 @@ An example frame from the stimulus appears in figure \ref{fig:preliminary-data-f
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{figures/preliminary-data-frame}
-\cation{An example frame from the stimulus used in our preliminary experiment.
+\caption{An example frame from the stimulus used in our preliminary experiment.
 The number of characters in the scene were successfully predicted from the fMRI time series data despite the complex scene and camera motion.}
 \label{fig:preliminary-data-frame}
 \end{figure}
@@ -141,7 +141,7 @@ During this presentation procedure, the subjects will perform a simple task in o
 The task will be to indicate whether two images of the same face or place appear during a single presentation.
 To be specific, the exact same image will never appear in the same presentation but as previously discussed there are four different images of each face and place in the database.
 This will ensure that the subjects carefully study each face and place during every presentation.
-It is important that the task not employ memory between presentations as previous exeperiments \ref{peacock} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
+It is important that the task not employ memory between presentations as previous exeperiments \cite{Lewis-Peacock2012} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
 
 
 \subsection{Preprocessing}
@@ -154,7 +154,7 @@ Therefore, we will manually adjust this value until the deconvolved signal has i
 This number will vary from run to run depending on the state of the scanner as well as the subject.
 
 Before applying our machine learning algorithms to the data we will need to reduce the dimensionality.
-Previous experiments \ref{blah} as well as our own have shown that an event related metric can be used to select useful voxels for training.
+Previous experiments \cite{Pereira2009} as well as our own have shown that an event related metric can be used to select useful voxels for training.
 Performing this procedure will drastically reduce the input dimensionality of our problem from the total number of voxels ($\sim$500,000) to several thousan voxels.
 We employ a procedure that we call harmonic analysis where we rank each voxel by the percent of the voxel's power spectrum contained in the stimulus' presentation frequency and its harmonics.
 In this way, we select all voxels which covary in any way with respect to the stimulus.
@@ -167,14 +167,14 @@ The trained algorithms are then tested by guessing the correct label of previous
 The performance of a machine learning algorithm on the dataset is defined to be the probability that a previously unpresented examle will be labeled correctly.
 This measure of performance can only be estimated due to the finite number of examples.
 
-In order to minimize the bias of our estimate of performance, we will test our machine learning algorithms using a cross-validation approach \ref{crossval}.
+In order to minimize the bias of our estimate of performance, we will test our machine learning algorithms using a cross-validation approach \cite{Kohavi1995}.
 First, the entire dataset is split into $N$ partitions or folds.
 Each machine learning algorithm is trained on every example in $N-1$ folds and performance is tested on the remaining fold.
 This is repeated for all $N$ folds and the performance from each fold is averaged to obtain the final estimate of performance for each algorithm.
-Researchers have noted that temporal correlation between adjacent frames can lead to overly optimistic estimates of performance if adjacent frames are present in the training and test sets \ref{tempcor}.
+Researchers have noted that temporal correlation between adjacent frames can lead to overly optimistic estimates of performance if adjacent frames are present in the training and test sets \cite{Pereira2009}.
 Therefore, the folds will be selected such that a minimum average temporal distance is maintained between all of the folds.
 Additionally, we will ensure that number of examples of each face count is equally represented in all of the folds.
-This is knows as stratified cross-fold validation \ref{strat} and it leads to a less biased estimate of classifier performance.
+This is knows as stratified cross-fold validation \cite{Kohavi1995} and it leads to a less biased estimate of classifier performance.
 
 With a method for accurately estimating the performance of machine learning classifiers on our dataset we can compare and develop better classification techniques.
 Initially, we will estimate the performance of classic linear support vector machines (SVM) and feed-froward neural networks.
