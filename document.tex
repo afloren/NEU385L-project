@@ -5,6 +5,9 @@
 \usepackage{graphicx}
 \usepackage[subrefformat=parens]{subcaption}
 \usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage[table]{xcolor}
 \usepackage{url}
 \usepackage{hyperref}
 
@@ -15,6 +18,7 @@
 \bibliographystyle{ieeetr}
 
 \begin{document}
+
 \maketitle{}
 
 \section{Aims}
@@ -45,18 +49,130 @@ It's usually best to divide this section based on your Aims.
 Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
 This section should be around 1000 words.
 
+Background on fMRI and machine learning applied to fMRI
 
+Background on counting experiments
+
+Background on machine learning
 
 \section{Preliminary/Expected Results}
-The third section is Preliminary Results, a concise description of data you've already obtained. 
-If you don't have any data yet, you can substitute a short section called "Expected Results" that describes the character of the data you plan to obtain. 
-This section should be around 500 words and include several figures such as plots of experimental data (planned or real) and diagrams that lay out experimental rigs, protocols, and stimuli.
+We have preliminary data indicating that it should be possible to predict the number of faces that a subject is viewing.
+In another study we collected fMRI time series data while the subject viewed a complex virtual world stimulus.
+The stimulus takes place in a virtual town where the subject alternates between moving through the virtual town and viewing animated characters.
+An example frame from the stimulus appears in figure \ref{fig:preliminary-data-frame}.
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/preliminary-data-frame}
+\cation{}
+\label{fig:preliminary-data-frame}
+\end{figure}
+Using both neural networks and a linear support vector machines (SVM) we were able to predict the number of characters that a subject was viewing at well above chance levels.
+The accuracy results for both the neural network and linear SVM are summarized as confusion matrices in figure \ref{fig:preliminary-data-confusion}.
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\input{tables/svm-confusion.tex}
+\caption{}
+\label{fig:svm-confusion}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\centering
+\input{tables/nn-confusion.tex}
+\caption{}
+\label{fig:nn-confusion}
+\end{subfigure}
+\caption{}
+\label{fig:preliminary-data-confusion}
+\end{figure}
+Each cell in a confusion matrix contains the number of examples from one class, indicated by the row, that were classified as another class, indicated by the column.
+Therefore, the cells along the diagonal indicate correctly classified examples.
+The color of the cell indicates the percent of examples that fall in that cell out of all examples in the row.
+Completely red indicates zero percent while completely green indicates one-hundred percent.
+If the classifiers were guessing randomly then every cell would be the same color.
+On average, the classifiers are able to correctly classify the examples over fifty percent of the time.
+
+However, the stimulus was very complex which makes it difficult to tease apart precisely what dimension the the classification algorithms were measuring.
+A sensitivity analysis indicated that the majority of useful information for training the neural network is contained primarily in the occipital lobe along both the ventral and dorsal visual streams.
+It is unclear whether the classifiers were measuring purely low level visual features to make their predictions or if higher level object recognition circuits were involved.
+Our new experiment will allow us to better understand the potential and limitations of applying machine learning techniques to this problem.
 
 \section{Research Design}
 Finally, comes the Research Design. 
 This lays out the core of the research, describing precisely but concisely what you plan to do, how you are going to analyze the results, and how the results will be interpreted. 
 Use references to existing work when pertinent. 
 Use figures and graphics as needed (1000 – 2000 words).
+
+\subsection{fMRI}
+Data will be collected from the subjects using a Sieman's Skyra scanner with the product 32-channel head coil.
+Functional data will be collected using the SENSE EPI product sequence with 2 millimeter cubic voxels, 50 slices, and a TR of 2.5 seconds.
+The slice perscription will be oriented along the axis formed between the anterior and posterior commissures.
+Before and after functional data collection, we will also record inplane T1-weighted anatomical images using the MP RAGE product sequence.
+In a separate session, we will collect high resolution T1-weighted anatomical images also using the MP RAGE product sequence with 0.7 millimeter cubic voxels.
+
+\subsection{Stimulus}
+While functional data is being collected, the subjects will view a stimulus on a computer monitor and perform a simple task.
+The stimulus employs a classic block presentation design where images are presented for 15 seconds followed by 15 seconds of an empty screen.
+During each presentation period, images of faces and places are presented in a two by three grid.
+An example frame is presented in figure \ref{fig:stimulus-frame}.
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/stimulus-frame}
+\caption{}
+\label{fig:stimulus-frame}
+\end{figure}
+We are using the same face and place images used in \cite{Haxby2001}.
+The images have had their contrasts normalized and have been closely cropped in order to limit confounding factors.
+The database contains four images of six different people for a total of twenty-four face images.
+Similarly, the database contains four images of six different locations for a total of twenty-four location images.
+Some combination of one to six faces and zero to five places will appear during the image presentation.
+To the subject, the presentation will be apparently random but the presentation order is controlled so that two exmaples for all six possible face counts will be present.
+As a result, there will also be two examples for all six possible place counts in each run.
+We plan to record two sessions for each subject and six runs during each session.
+This will give us plenty of data with which to train our machine learning algorithms.
+
+During this presentation procedure, the subjects will perform a simple task in order to properly direct their attentional resources.
+The task will be to indicate whether two images of the same face or place appear during a single presentation.
+To be specific, the exact same image will never appear in the same presentation but as previously discussed there are four different images of each face and place in the database.
+This will ensure that the subjects carefully study each face and place during every presentation.
+It is important that the task not employ memory between presentations as previous exeperiments \ref{peacock} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
+
+
+\subsection{Preprocessing}
+We will perform standard inter- and intra-run motion compensation and slice timing correction \ref{motcomp}.
+We will then concatenate each run to form a single time series for each session.
+In order to correct for the time delay introduced by the hemodynamic response in the brain we will perform Wiener-filter deconvolution.
+Wiener-filter deconvolution optimally deconvoles a signal using a known convolution kernel, in our case the hemodynamic response function, and a measure of the spectral signal to noise ratio (SNR) of the time series.
+This SNR measurement is impractical if not impossible to make in fMRI due to the complex structure of the noise.
+Therefore, we will manually adjust this value until the deconvolved signal has its phase properly adjusted without overly amplifying the noise.
+This number will vary from run to run depending on the state of the scanner as well as the subject.
+
+Before applying our machine learning algorithms to the data we will need to reduce the dimensionality.
+Previous experiments \ref{blah} as well as our own have shown that an event related metric can be used to select useful voxels for training.
+Performing this procedure will drastically reduce the input dimensionality of our problem from the total number of voxels ($\sim$500,000) to several thousan voxels.
+We employ a procedure that we call harmonic analysis where we rank each voxel by the percent of the voxel's power spectrum contained in the stimulus' presentation frequency and its harmonics.
+In this way, we select all voxels which covary in any way with respect to the stimulus.
+
+\subsection{Analysis}
+
+
+Each frame in the time series will then be labeled according to the number of faces presented to the subject at the time of image acquisition.
+These labeled examples are presented to the machine learning algorithms in order to train them.
+The trained algorithms are then tested by guessing the correct label of previously unpresented examples.
+The performance of the machine learning algorithm on the dataset is the probability that a previously unpresented examle will be labeled correctly.
+This measure of performance can only be estimated due to the finite number of examples.
+
+In order to minimize the bias of our estimate of performance, we will test the neural network and linear SVM using a cross-validation approach \ref{crossval}.
+First, the entire dataset is split into $N$ partitions or folds.
+Next, the linear SVM is trained on every example in $N-1$ folds and performance is tested on the remaining fold.
+This is repeated for all $N$ folds and the performance from each fold is averaged to obtain the final estimate of performance.
+This whole process is then repeated to obtain an estimate of performance for the neural network.
+Researchers have noted that temporal correlation between adjacent frames can lead to overly optimistic estimates of performance if adjacent frames are present in the training and test sets \ref{tempcor}.
+Therefore, the folds will be selected such that a minimum average temporal distance is maintained between all of the folds.
+Additionally, we will ensure that number of examples of each face count is equally represented in all of the folds.
+This is knows as stratified cross-fold validation \ref{strat} and it leads to a less biased estimate of classifier performance.
+
+
 
 \bibliography{bib}
 
