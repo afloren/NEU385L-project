@@ -44,7 +44,6 @@ Being able to classify what the subject is viewing and how many will allow resea
 Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure this dimension and dimensions in general.
 
 \section{Background}
-Our experiment will employ both 
 
 \subsection{Functional MRI}
 Functional magnetic resonance imaging (fMRI) is an application of MRI at speeds that allow for the imaging of fast changing physiological events instead of more static anatomical information.
@@ -110,7 +109,7 @@ In other experiments, researchers are interested in identifying the part of the 
 It is likely that the neural representation of count is both highly overlapping and highly distributed depending on the type of counting being performed and thus classical statistical analysis approaches would have a difficult time discriminating them. 
 This overlapping and distributed nature makes perceived count a perfect target for a machine learning approach.
 
-\section{Preliminary/Expected Results}
+\section{Preliminary Results}
 We have preliminary data indicating that it should be possible to predict the number of faces that a subject is viewing.
 In another study we collected fMRI time series data while the subject viewed a complex virtual world stimulus.
 The stimulus takes place in a virtual town where the subject alternates between moving through the virtual town and viewing animated characters.
@@ -230,7 +229,7 @@ This will ensure that the subjects carefully study each face and place during ev
 It is important that the task not employ memory between presentations as previous experiments \cite{Lewis-Peacock2012} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
 
 \subsection{Preprocessing}
-We will perform standard inter- and intra-run motion compensation and slice timing correction \cite{Nestares2000}.
+We will perform standard inter- and intra-run motion compensation \cite{Nestares2000} and slice timing correction \cite{Sladky2011}.
 We will then concatenate each run to form a single time series for each session.
 In order to correct for the time delay introduced by the hemodynamic response in the brain we will perform Wiener-filter deconvolution.
 Wiener-filter deconvolution optimally deconvoles a signal using a known convolution kernel, in our case the hemodynamic response function, and a measure of the spectral signal to noise ratio (SNR) of the time series.
