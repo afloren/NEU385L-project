@@ -23,14 +23,13 @@
 
 \section{Aims}
 Traditionally, fMRI has been used to study the spatial and temporal correlation of metabolic activity in the brain with various external activities or tasks.
-A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{Haxby2001,Mitchell2003,Haynes2006}.
+A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the external activity or task from the pattern of activation \cite{Haxby2001,Mitchell2003,Haynes2006}.
 In this way, researchers hope to uncover more complex relationships between the patterns of activation and the external activity.
 Thus far, researchers have been successful in differentiating the patterns of activation that result from subjects viewing broad categories of objects.
 For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a house and a variety of other object categories.
 Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{Lewis-Peacock2012,Davatzikos2005}.
 However, these studies are limited to the dimensions that can be resolved by the current predictive methods; i.e., we can resolve the difference between a subject viewing a face and a place, but not between a subject viewing two different faces.
-Our first goal is to introduce and evaluate a new resolvable dimension, specifically the perceived count of broad object categories.
-For example, the number of faces that a subject perceives in a stimulus.
+Our first goal is to introduce and evaluate a new resolvable dimension, specifically the perceived count of broad object categories (e.g., the number of faces that a subject perceives in a stimulus).
 Our second goal is to develop better predictive methods for increasing the resolution along resolvable dimensions in general.
 
 The current lack of resolvable dimensions is due in large part to the novelty of the approach.
@@ -41,15 +40,11 @@ Thus far, only relatively simple machine learning algorithms have been employed 
 
 Our own preliminary results suggest that it should be possible to predict the number of objects a subject is viewing and this is where we will be focusing the initial stages of our research.
 We will evaluate the precision and accuracy with which this dimension can be predicted.
-Being able to classify not only what the subject is viewing, but also how many will allow researchers to develop new cognitive and behavioral studies. 
+Being able to classify what the subject is viewing and how many will allow researchers to develop new cognitive and behavioral studies. 
 Additionally, we will experiment with more state of the art machine learning algorithms in order to improve the resolution with which we can measure this dimension and dimensions in general.
 
 \section{Background}
-Next comes a Background section, which introduces the key scientific or technological concepts that underlie your Aims. 
-This section will have lots of references to previous work in the area. 
-It's usually best to divide this section based on your Aims. 
-Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
-This section should be around 1000 words.
+Our experiment will employ both 
 
 \subsection{Functional MRI}
 Functional magnetic resonance imaging (fMRI) is an application of MRI at speeds that allow for the imaging of fast changing physiological events instead of more static anatomical information.
@@ -81,16 +76,16 @@ A general neural network is a very powerful tool, however efficient methods for 
 On the other hand, more constrained feed-forward neural networks have found much success using relatively simple back-propagation training techniques.
 One of the most popular machine learning algorithms is the support vector machine (SVM).
 Although it is not generally considered a neural network algorithm, the SVM was called a support-vector network by its original author and much intuition was drawn from existing neural network literature \cite{Cortes1995}.
-For a simple two-class problem, the SVM tries to find a single hyperplane which maximally separates all datapoints in the labeled dataset.
+For a simple two-class problem, the SVM tries to find a single hyperplane which maximally separates all data points in the labeled dataset.
 This hyerplane is then used to classify new data points.
 In the case that a single separating hyperplane does not exist, the algorithm will still converge to a highly discriminative hyperplane.
 Furthermore, the SVM can be modified to support $N$-class problems by solving for $N-1$ hyperplanes which separate all of the classes.
 The authors of \cite{Burges1998} have written an excellent tutorial article covering the application of the SVM to classification and pattern recognition
 
 \subsection{Machine Learning applied to fMRI}
-The abundance of data and the ralatively high dimensionality would seem to make machine learning a natural fit for application to fMRI data.
+The abundance of data and the relatively high dimensionality would seem to make machine learning a natural fit for application to fMRI data.
 The authors of \cite{Haxby2001} were the first to utilize machine learning methods in their analysis.
-In their experiment, they tested the discriminability of the perception of various object categories including faces, houses, and other man made objects.
+In their experiment, they tested the discriminability of the perception of various object categories including faces, houses, and other manmade objects.
 Interestingly, they showed that the patterns of activation were easily classified by machine learning algorithms but that those patterns were also highly overlapping.
 This distributed and overlapping nature of many processes in the brain can confound more classical statistical analysis methods.
 The authors of \cite{Mitchell2003} and \cite{Haynes2006} helped to expand this concept and introduced methods for producing maps of task correlated activity using sensitivity analysis.
@@ -98,21 +93,21 @@ The authors of \cite{Mitchell2003} and \cite{Haynes2006} helped to expand this c
 The majority of the existing literature in this area focuses on the discriminability of the perception of broad object categories discovered in \cite{Haxby2001}.
 Unfortunately, this has limited the acceptance of machine learning as a broader analytical tool in fMRI.
 Some very promising experiments such as \cite{Lewis-Peacock2012} have been developed to properly utilize these algorithms but they all adhere firmly to the well-documented and well-analyzed object category discrimination stimulus.
-By documenting and analyzing new and interesting stimuli that can be measured using machine learning algorithms we will open the door for exiciting new opportunities in cognitive and behavioral neuroscience.
+By documenting and analyzing new and interesting stimuli that can be measured using machine learning algorithms we will open the door for exciting new opportunities in cognitive and behavioral neuroscience.
 
 Another reason that experiments utilizing machine learning as an analysis method have by and large only used the object category discrimination stimulus is likely due to the fact that the stimulus generates very easily recognizable patterns.
 Most machine learning algorithms will have no problem attaining near perfect performance on a well collected dataset using this stimulus.
 This instills a very high level of confidence in conclusions drawn from the results.
-By developing improved machine learning techniques specifically for fMRI data we will be able to improve researchers confidence in conclusions drawn from a wider variety of stimulus designs.
+By developing improved machine learning techniques specifically for fMRI data we will be able to improve researchers' confidence in conclusions drawn from a wider variety of stimulus designs.
 
 \subsection{Face Perception and Counting Tasks}
 Object recognition and specifically face recognition areas of the brain have been studied for some time \cite{McCarthy1997}. 
-It is for this reason that the authors of \cite{Haxby2001} likely chose it for their first forray into machine learning techniques. 
+It is for this reason that the authors of \cite{Haxby2001} likely chose it for their first foray into machine learning techniques. 
 On the other hand, counting or the perception of number is much less studied in the fMRI domain.
 Many stimuli use counting as part of the task a subject performs while viewing a stimulus \cite{Bush1998,Mostofsky2003}.
 However, these experiments are generally not concerned with the neural representation of the count and it would be more of a confound in their results than anything else.
 In other experiments, researchers are interested in identifying the part of the brain associated with arithmetic computation \cite{Rickard2000,Eliez2001}, but again these experiments are not concerned with specific counts or values of the computation being performed.
-It is likely that the neural representation of count is both highly overlapping and highly distributed depending on the type of counting being performed and thus classical statistical analyis approaches would have a difficult time discriminating them. 
+It is likely that the neural representation of count is both highly overlapping and highly distributed depending on the type of counting being performed and thus classical statistical analysis approaches would have a difficult time discriminating them. 
 This overlapping and distributed nature makes perceived count a perfect target for a machine learning approach.
 
 \section{Preliminary/Expected Results}
@@ -155,7 +150,7 @@ Completely red indicates zero percent while completely green indicates one-hundr
 If the classifiers were guessing randomly then every cell would be the same color.
 On average, the classifiers are able to correctly classify the examples over fifty percent of the time.
 
-However, the stimulus was very complex which makes it difficult to tease apart precisely what dimension the the classification algorithms were measuring.
+However, the stimulus was very complex which makes it difficult to tease apart precisely what dimension the classification algorithms were measuring.
 A sensitivity analysis indicated that the majority of useful information for training the neural network is contained primarily in the occipital lobe along both the ventral and dorsal visual streams.
 This sensitivity analysis is presented in figure \ref{fig:preliminary-data-sensitivity}.
 \begin{figure}
@@ -188,19 +183,19 @@ This sensitivity analysis is presented in figure \ref{fig:preliminary-data-sensi
 Brighter regions indicate voxels that were important for successful discrimination by the machine-learning algorithms.}
 \label{fig:preliminary-data-sensitivity}
 \end{figure}
-It is unclear whether the classifiers were measuring purely low level visual features to make their predictions or if higher level object recognition circuits were involved.
+It is unclear whether the classifiers were measuring purely low level visual features to make their predictions or if higher-level object recognition circuits were involved.
 Our new experiment will allow us to better understand the potential and limitations of applying machine learning techniques to this problem.
 
 \section{Research Design}
 We will be using an MRI machine to collect functional data from six subjects while they view a visual stimulus containing images of faces on a computer monitor and perform a simple visual task.
 This data will then be preprocessed and analyzed by baseline machine learning algorithms in order to determine the resolvability of the perception of multiple objects.
 Finally, we will experiment with more complex machine learning algorithms in order to improve the resolution of this measurement.
-Due to the complexity of our experiment, we have divied our research plan into four distinct and relatively independent sections: fMRI, stimulus, preprocessing, and analysis.
+Due to the complexity of our experiment, we have divided our research plan into four distinct and relatively independent sections: fMRI, stimulus, preprocessing, and analysis.
 
 \subsection{fMRI}
 Data will be collected from the subjects using a Sieman's Skyra scanner with the product 32-channel head coil.
 Functional data will be collected using the SENSE EPI product sequence with 2 millimeter cubic voxels, 50 slices, and a TR of 2.5 seconds.
-The slice perscription will be oriented along the axis formed between the anterior and posterior commissures.
+The slice prescription will be oriented along the axis formed between the anterior and posterior commissures.
 Before and after functional data collection, we will also record inplane T1-weighted anatomical images using the MP RAGE product sequence.
 In a separate session, we will collect high resolution T1-weighted anatomical images also using the MP RAGE product sequence with 0.7 millimeter cubic voxels.
 
@@ -223,7 +218,7 @@ The images have had their contrasts normalized and have been closely cropped in 
 The database contains four images of six different people for a total of twenty-four face images.
 Similarly, the database contains four images of six different locations for a total of twenty-four location images.
 Some combination of one to six faces and zero to five places will appear during the image presentation.
-To the subject, the presentation will be apparently random but the presentation order is controlled so that two exmaples for all six possible face counts will be present.
+To the subject, the presentation will be apparently random but the presentation order is controlled so that two examples for all six possible face counts will be present.
 As a result, there will also be two examples for all six possible place counts in each run.
 We plan to record two sessions for each subject and six runs during each session.
 This will give us plenty of data with which to train our machine learning algorithms.
@@ -232,7 +227,7 @@ During this presentation procedure, the subjects will perform a simple task in o
 The task will be to indicate whether two images of the same face or place appear during a single presentation.
 To be specific, the exact same image will never appear in the same presentation but as previously discussed there are four different images of each face and place in the database.
 This will ensure that the subjects carefully study each face and place during every presentation.
-It is important that the task not employ memory between presentations as previous exeperiments \cite{Lewis-Peacock2012} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
+It is important that the task not employ memory between presentations as previous experiments \cite{Lewis-Peacock2012} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
 
 \subsection{Preprocessing}
 We will perform standard inter- and intra-run motion compensation and slice timing correction \cite{Nestares2000}.
@@ -250,11 +245,11 @@ We employ a procedure that we call harmonic analysis where we rank each voxel by
 In this way, we select all voxels which covary in any way with respect to the stimulus.
 
 \subsection{Analysis}
-To determine the resolvability of the dimension of perceived object count we will estimate the performance of machine learning classifers at predicting the presented number of faces in the stimulus.
+To determine the resolvability of the dimension of perceived object count we will estimate the performance of machine learning classifiers at predicting the presented number of faces in the stimulus.
 Each frame in the time series will be labeled according to the number of faces presented to the subject at the time of image acquisition.
 These labeled examples are presented to the machine learning algorithms in order to train them.
 The trained algorithms are then tested by guessing the correct label of previously unpresented examples.
-The performance of a machine learning algorithm on the dataset is defined to be the probability that a previously unpresented examle will be labeled correctly.
+The performance of a machine learning algorithm on the dataset is defined to be the probability that a previously unpresented example will be labeled correctly.
 This measure of performance can only be estimated due to the finite number of examples.
 
 In order to minimize the bias of our estimate of performance, we will test our machine learning algorithms using a cross-validation approach \cite{Kohavi1995}.
@@ -267,11 +262,11 @@ Additionally, we will ensure that number of examples of each face count is equal
 This is knows as stratified cross-fold validation \cite{Kohavi1995} and it leads to a less biased estimate of classifier performance.
 
 With a method for accurately estimating the performance of machine learning classifiers on our dataset we can compare and develop better classification techniques.
-Initially, we will estimate the performance of classic linear support vector machines (SVM) and feed-froward neural networks.
-Previous work and our own preliminary reuslts indicate that these basic approaches work very well and they will servce is a good baseline for comparing other algorithms.
+Initially, we will estimate the performance of the classic linear SVMs and feed-forward neural networks.
+Previous work and our own preliminary results indicate that these basic approaches work very well and they will serve is a good baseline for comparing other algorithms.
 We will then analyze more complex recurrent neural networks, such as Restricted Boltzmann Machines, and non-linear support vector machines in order to discover improved classification techniques.
 Improved classification techniques directly translate to improved resolution along the dimension of perceived object count and will likely lead to improved resolution in other dimensions as well.
-New measureable dimensions and improved resolution along those dimensions in turn will lead to new insightful behavioural and cognitive experiments.
+New measureable dimensions and improved resolution along those dimensions in turn will lead to new insightful behavioral and cognitive experiments.
 
 \bibliography{bib}
 
