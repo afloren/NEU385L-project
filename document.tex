@@ -26,16 +26,18 @@ Traditionally, fMRI has been used to study the spatial and temporal correlation 
 A recent trend in the field has seen machine learning applied to fMRI data in an attempt to blindly predict the the external activity or task from the pattern of activation \cite{Haxby2001,Mitchell2003,Haynes2006}.
 In this way, researchers hope to uncover more complex relationships between the patterns of activation and the external activity.
 Thus far, researchers have been successful in differentiating the patterns of activation that result from subjects viewing broad categories of objects.
-For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a place.
+For example, the researchers in \cite{Haxby2001} were able to differentiate the pattern of activation created by a subject viewing an image of a face from the pattern created by a subject viewing a house and a variety of other object categories.
 Using these predictive methods as tools, other researchers have assembled a number of insightful cognitive and behavioral studies \cite{Lewis-Peacock2012,Davatzikos2005}.
 However, these studies are limited to the dimensions that can be resolved by the current predictive methods; i.e., we can resolve the difference between a subject viewing a face and a place, but not between a subject viewing two different faces.
-Our goals are to introduce and evaluate a new resolvable dimension, as well as to develop better predictive methods for increasing the resolution along resolvable dimensions in general.
+Our first goal is to introduce and evaluate a new resolvable dimension, specifically the perceived count of broad object categories.
+For example, the number of faces that a subject perceives in a stimulus.
+Our second goal is to develop better predictive methods for increasing the resolution along resolvable dimensions in general.
 
 The current lack of resolvable dimensions is due in large part to the novelty of the approach.
 There is a wealth of information regarding correlation analyses between functional activation and all manner of tasks, but so far the number of tasks that predictive methods have been applied to is limited.
 The resolution along dimensions is limited in part by measurement noise; this includes noise introduced by the scanner as well as cognitive processes.
 However, the resolution is also limited by the quality of the predictive methods utilized.
-Thus far, only relatively simple machine learning techniques have been employed due to the necessary cross-disciplinary collaboration required for more complex machine learning techniques.
+Thus far, only relatively simple machine learning algorithms have been employed due to the necessary cross-disciplinary collaboration required for implementing and properly analyzing more complex machine learning techniques.
 
 Our own preliminary results suggest that it should be possible to predict the number of objects a subject is viewing and this is where we will be focusing the initial stages of our research.
 We will evaluate the precision and accuracy with which this dimension can be predicted.
@@ -49,20 +51,69 @@ It's usually best to divide this section based on your Aims.
 Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
 This section should be around 1000 words.
 
-fMRI intro
-BOLD response.
-functional imaging experiment design: block/event \cite{Dale1997,Liu2001}.
-statistical anlysis: glm \cite{Worsley1995,Beckmann2003}, coherence \cite{Bandettini1993}.
+\subsection{Functional MRI}
+Functional magnetic resonance imaging (fMRI) is an application of MRI at speeds that allow for the imaging of fast changing physiological events instead of more static anatomical information.
+Most commonly, fMRI is employed to measure localized functional activation in the brain.
+This measurement is made possible by the fact that deoxygenated hemoglobin in the blood is a naturally occurring contrast agent for MRI.
+The fluctuation in the measured MRI signal induced by the relative local concentration of oxygenated and deoxygenated hemoglobin is known as the blood oxygenation level-dependent (BOLD) contrast \cite{Ogawa1990}.
+In turn, BOLD contrast can be used to localize activation in the brain thanks to the neural hemodynamic response.
+Neural activity requires increased metabolic activity including increased oxygen uptake (i.e., CMR02).
+To compensate for this increased uptake, the brain must in turn supply more oxygen to the activated regions.
+Through vascular regulation, the brain is able to direct increased blood flow and thus more oxygenated blood to highly localized areas of the brain \cite{Buxton2004}.
+In this way, the BOLD contrast is coupled with local neural activity.
 
-machine learning intro.
-linear SVM \cite{Burges1998}.
-feed-forward neural network \cite{Hecht-nielsen1989,Jain1996}.
+However, the contrast induced by neural activity is extremely small, on the order 1\%.
+Worse still, the noise variance of fMRI data is also on the order of 1\%.
+Therefore, fMRI experiments are designed to maximize detection power when the signal to noise ratio (SNR) is approximately unity.
+The two most common experiment paradigms are blocked and event related.
+In blocked experiment designs, the subject is presented with a stimulus or task for a fixed time period after which they are presented with a second stimulus or task for the same time period.
+The two blocks alternate for the duration of the scan.
+In event related design, events or stimuli appear at random intervals for relatively brief durations.
+The simple blocked design has greater detection power but the event related design is more flexible in terms of what can be measured \cite{Dale1997,Liu2001}.
+Once the data has been collected, statistical anlysis is used to calculate the confidence with which conclusions can be drawn from the data.
+A wide range of tools has been developed for this purpose \cite{Bandettini1993}, from coherence analyses to generalized linear model approaches \cite{Worsley1995,Beckmann2003}.
 
-Application of machine learning to fMRI.
-list some examples \cite{Haxby2001,Mitchell2003,Haynes2006} with pros and shortcomings.
-How machine learning relates to statistical analysis.
+\subsection{Machine Learning}
+Machine learning is a broad term for algorithms that are able to learn or improve their performance on large datasets.
+We will specifically be dealing with supervised classification algorithms which learn from a large dataset of pre-classified or labeled examples how to classify new data points.
+Many machine learning algorithms draw intuition from our understanding of the human brain, most notably the perceptron and neural network \cite{Hecht-nielsen1989,Jain1996}.
+A general neural network is a very powerful tool, however efficient methods for training such a machine have proven elusive.
+On the other hand, more constrained feed-forward neural networks have found much success using relatively simple back-propagation training techniques.
+One of the most popular machine learning algorithms is the support vector machine (SVM).
+Although it is not generally considered a neural network algorithm, the SVM was called a support-vector network by its original author and much intuition was drawn from existing neural network literature \cite{Cortes1995}.
+For a simple two-class problem, the SVM tries to find a single hyperplane which maximally separates all datapoints in the labeled dataset.
+This hyerplane is then used to classify new data points.
+In the case that a single separating hyperplane does not exist, the algorithm will still converge to a highly discriminative hyperplane.
+Furthermore, the SVM can be modified to support $N$-class problems by solving for $N-1$ hyperplanes which separate all of the classes.
+The authors of \cite{Burges1998} have written an excellent tutorial article covering the application of the SVM to classification and pattern recognition
 
-Background on face \cite{McCarthy1997,Haxby2001} and counting \cite{Bush1998} \cite{Rickard2000} \cite{Eliez2001} \cite{Mostofsky2003} experiments
+\subsection{Machine Learning applied to fMRI}
+The abundance of data and the ralatively high dimensionality would seem to make machine learning a natural fit for application to fMRI data.
+The authors of \cite{Haxby2001} were the first to utilize machine learning methods in their analysis.
+In their experiment, they tested the discriminability of the perception of various object categories including faces, houses, and other man made objects.
+Interestingly, they showed that the patterns of activation were easily classified by machine learning algorithms but that those patterns were also highly overlapping.
+This distributed and overlapping nature of many processes in the brain can confound more classical statistical analysis methods.
+The authors of \cite{Mitchell2003} and \cite{Haynes2006} helped to expand this concept and introduced methods for producing maps of task correlated activity using sensitivity analysis.
+
+The majority of the existing literature in this area focuses on the discriminability of the perception of broad object categories discovered in \cite{Haxby2001}.
+Unfortunately, this has limited the acceptance of machine learning as a broader analytical tool in fMRI.
+Some very promising experiments such as \cite{Lewis-Peacock2012} have been developed to properly utilize these algorithms but they all adhere firmly to the well-documented and well-analyzed object category discrimination stimulus.
+By documenting and analyzing new and interesting stimuli that can be measured using machine learning algorithms we will open the door for exiciting new opportunities in cognitive and behavioral neuroscience.
+
+Another reason that experiments utilizing machine learning as an analysis method have by and large only used the object category discrimination stimulus is likely due to the fact that the stimulus generates very easily recognizable patterns.
+Most machine learning algorithms will have no problem attaining near perfect performance on a well collected dataset using this stimulus.
+This instills a very high level of confidence in conclusions drawn from the results.
+By developing improved machine learning techniques specifically for fMRI data we will be able to improve researchers confidence in conclusions drawn from a wider variety of stimulus designs.
+
+\subsection{Face Perception and Counting Tasks}
+Object recognition and specifically face recognition areas of the brain have been studied for some time \cite{McCarthy1997}. 
+It is for this reason that the authors of \cite{Haxby2001} likely chose it for their first forray into machine learning techniques. 
+On the other hand, counting or the perception of number is much less studied in the fMRI domain.
+Many stimuli use counting as part of the task a subject performs while viewing a stimulus \cite{Bush1998,Mostofsky2003}.
+However, these experiments are generally not concerned with the neural representation of the count and it would be more of a confound in their results than anything else.
+In other experiments, researchers are interested in identifying the part of the brain associated with arithmetic computation \cite{Rickard2000,Eliez2001}, but again these experiments are not concerned with specific counts or values of the computation being performed.
+It is likely that the neural representation of count is both highly overlapping and highly distributed depending on the type of counting being performed and thus classical statistical analyis approaches would have a difficult time discriminating them. 
+This overlapping and distributed nature makes perceived count a perfect target for a machine learning approach.
 
 \section{Preliminary/Expected Results}
 We have preliminary data indicating that it should be possible to predict the number of faces that a subject is viewing.
@@ -76,7 +127,7 @@ An example frame from the stimulus appears in figure \ref{fig:preliminary-data-f
 The number of characters in the scene were successfully predicted from the fMRI time series data despite the complex scene and camera motion.}
 \label{fig:preliminary-data-frame}
 \end{figure}
-Using both neural networks and a linear support vector machines (SVM) we were able to predict the number of characters that a subject was viewing at well above chance levels.
+Using both feed forward neural networks and a linear SVM we were able to successfully predict the number of characters that a subject was viewing.
 The accuracy results for both the neural network and linear SVM are summarized as confusion matrices in figure \ref{fig:preliminary-data-confusion}.
 \begin{figure}
 \centering
@@ -106,6 +157,37 @@ On average, the classifiers are able to correctly classify the examples over fif
 
 However, the stimulus was very complex which makes it difficult to tease apart precisely what dimension the the classification algorithms were measuring.
 A sensitivity analysis indicated that the majority of useful information for training the neural network is contained primarily in the occipital lobe along both the ventral and dorsal visual streams.
+This sensitivity analysis is presented in figure \ref{fig:preliminary-data-sensitivity}.
+\begin{figure}
+\centering
+\begin{subfigure}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/lh-lateral-smax-average}
+\caption{}
+\label{fig:lh-lateral-smax-average}
+\end{subfigure}
+\begin{subfigure}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/lh-medial-smax-average}
+\caption{}
+\label{fig:lh-medial-smax-average}
+\end{subfigure}
+\begin{subfigure}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rh-lateral-smax-average}
+\caption{}
+\label{fig:rh-lateral-smax-average}
+\end{subfigure}
+\begin{subfigure}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rh-medial-smax-average}
+\caption{}
+\label{fig:rh-medial-smax-average}
+\end{subfigure}
+\caption{The sensitivity analysis averaged across all subjects.
+Brighter regions indicate voxels that were important for successful discrimination by the machine-learning algorithms.}
+\label{fig:preliminary-data-sensitivity}
+\end{figure}
 It is unclear whether the classifiers were measuring purely low level visual features to make their predictions or if higher level object recognition circuits were involved.
 Our new experiment will allow us to better understand the potential and limitations of applying machine learning techniques to this problem.
 
@@ -163,7 +245,7 @@ This number will vary from run to run depending on the state of the scanner as w
 
 Before applying our machine learning algorithms to the data we will need to reduce the dimensionality.
 Previous experiments \cite{Pereira2009} as well as our own have shown that an event related metric can be used to select useful voxels for training.
-Performing this procedure will drastically reduce the input dimensionality of our problem from the total number of voxels ($\sim$500,000) to several thousan voxels.
+Performing this procedure will drastically reduce the input dimensionality of our problem from the total number of voxels ($\sim$500,000) to several thousand voxels.
 We employ a procedure that we call harmonic analysis where we rank each voxel by the percent of the voxel's power spectrum contained in the stimulus' presentation frequency and its harmonics.
 In this way, we select all voxels which covary in any way with respect to the stimulus.
 
