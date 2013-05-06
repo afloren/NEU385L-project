@@ -49,11 +49,20 @@ It's usually best to divide this section based on your Aims.
 Conclude discussion of each Aim with the "significance" of its goals, that is, why it is cool, novel, and useful. 
 This section should be around 1000 words.
 
-Background on fMRI and machine learning applied to fMRI
+fMRI intro
+BOLD response.
+functional imaging experiment design: block/event \cite{Dale1997,Liu2001}.
+statistical anlysis: glm \cite{Worsley1995,Beckmann2003}, coherence.
 
-Background on counting experiments
+machine learning intro.
+linear SVM \cite{Burges1998}.
+feed-forward neural network \cite{Hecht-nielsen1989,Jain1996}.
 
-Background on machine learning
+Application of machine learning to fMRI.
+list some examples \cite{Haxby2001,Mitchell2003,Haynes2006} with pros and shortcomings.
+How machine learning relates to statistical analysis.
+
+Background on face \cite{McCarthy1997,Haxby2001} and counting \cite{Bush1998} \cite{Rickard2000} \cite{Eliez2001} \cite{Mostofsky2003} experiments
 
 \section{Preliminary/Expected Results}
 We have preliminary data indicating that it should be possible to predict the number of faces that a subject is viewing.
@@ -101,10 +110,10 @@ It is unclear whether the classifiers were measuring purely low level visual fea
 Our new experiment will allow us to better understand the potential and limitations of applying machine learning techniques to this problem.
 
 \section{Research Design}
-Finally, comes the Research Design. 
-This lays out the core of the research, describing precisely but concisely what you plan to do, how you are going to analyze the results, and how the results will be interpreted. 
-Use references to existing work when pertinent. 
-Use figures and graphics as needed (1000 – 2000 words).
+We will be using an MRI machine to collect functional data from six subjects while they view a visual stimulus containing images of faces on a computer monitor and perform a simple visual task.
+This data will then be preprocessed and analyzed by baseline machine learning algorithms in order to determine the resolvability of the perception of multiple objects.
+Finally, we will experiment with more complex machine learning algorithms in order to improve the resolution of this measurement.
+Due to the complexity of our experiment, we have divied our research plan into four distinct and relatively independent sections: fMRI, stimulus, preprocessing, and analysis.
 
 \subsection{fMRI}
 Data will be collected from the subjects using a Sieman's Skyra scanner with the product 32-channel head coil.
@@ -143,9 +152,8 @@ To be specific, the exact same image will never appear in the same presentation 
 This will ensure that the subjects carefully study each face and place during every presentation.
 It is important that the task not employ memory between presentations as previous exeperiments \cite{Lewis-Peacock2012} have shown that differentiating between a subject viewing an image and a subject remembering an image can be difficult.
 
-
 \subsection{Preprocessing}
-We will perform standard inter- and intra-run motion compensation and slice timing correction \ref{motcomp}.
+We will perform standard inter- and intra-run motion compensation and slice timing correction \cite{Nestares2000}.
 We will then concatenate each run to form a single time series for each session.
 In order to correct for the time delay introduced by the hemodynamic response in the brain we will perform Wiener-filter deconvolution.
 Wiener-filter deconvolution optimally deconvoles a signal using a known convolution kernel, in our case the hemodynamic response function, and a measure of the spectral signal to noise ratio (SNR) of the time series.
